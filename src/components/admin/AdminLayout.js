@@ -5,7 +5,6 @@ import { MdOutlineManageAccounts } from 'react-icons/md'
 import { FiLogOut } from 'react-icons/fi'
 export default function AdminLayout() {
 
-
     const [data, setData] = useState([]);
     const [err, setErr] = useState("");
 
@@ -21,45 +20,44 @@ export default function AdminLayout() {
 
 
     return (
-        <div>
-            <div className="navbar bg-dark flex-nowrap">
-                <a className="col-md3 navbar-brand text-light" href="#">E-commerce</a>
-                <input type="text" className="w-25 form-control bg-dark text-light" />
-                <div className="nav">
-                    <div className="nav-item">
 
-                    </div>
-                    <div className="nav-item">
-                        <div className="dropdown">
-                            <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown button
-                            </button>
-                            <ul className="dropdown-menu">
-                                <li><a className="dropdown-item" href="#"><CgProfile />Profile</a></li>
-                                <li><a className="dropdown-item" href="#"><MdOutlineManageAccounts />Account setting</a></li>
-                                <li><a className="dropdown-item" href="#"><FiLogOut />Log out</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className="container-fluid">
-                <div className="row">
-                    <div className="col-md-2">
+        <div className=''>
+            <div className='d-flex row'>
+                <div className='pop col-2 bg-primary'>
+                        <span>OS Admin</span>
                         {data.map((e) => {
                             if (e.type === "adminMenu") {
-                                return <div className="nav bg-light flex-column">
-                                    <div className='nav-item'>
-                                        <Link to={`/${e.menuName}`}>{e.menuName}</Link>
-                                    </div>
+                                return <div className='d-flex flex-column'>
+                                    <Link to={`/${e.menuName.toLowerCase()}`}>{e.menuName}</Link>
                                 </div>
+
                             }
                         })}
+                    
+                </div>
+                <div className="col-10 p-0">
+                    <div className='d-flex flex-column'>
+                        <div className='d-flex justify-content-end p-3'>
+                            <div className='d-flex justify-content-between align-items-center'>
+                                <label className='col-4'>Search</label>
+                                <input type="text" className="w-100 form-control" />
+                            </div>
+
+
+                            <div className="dropdown">
+                                <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Admin
+                                </button>
+                                <ul className="dropdown-menu">
+                                    <li><a className="dropdown-item" href="#"><CgProfile />Profile</a></li>
+                                    <li><a className="dropdown-item" href="#"><MdOutlineManageAccounts />Account setting</a></li>
+                                    <li><a className="dropdown-item" href="#"><FiLogOut />Log out</a></li>
+                                </ul>
+                            </div>
+                        </div>
 
                     </div>
-                    <div className='col-md-10'>
-                        <Outlet />
-                    </div>
+                    <Outlet />
                 </div>
             </div>
         </div>
