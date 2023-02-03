@@ -24,24 +24,24 @@ export default function AdminLayout() {
         <div className=''>
             <div className='d-flex row'>
                 <div className='pop col-2 bg-primary'>
-                        <span>OS Admin</span>
-                        {data.map((e) => {
-                            if (e.type === "adminMenu") {
-                                return <div className='d-flex flex-column'>
-                                    <Link to={`/${e.menuName.toLowerCase()}`}>{e.menuName}</Link>
-                                </div>
+                    <span>OS Admin</span>
+                    {data.map((e) => {
+                        if (e.type === "adminMenu") {
+                            return <div className='d-flex flex-column'>
+                                <Link to={`/${e.menuName.toLowerCase()}`}>{e.menuName}</Link>
+                            </div>
 
-                            }
-                        })}
-                    
+                        }
+                    })}
+
                 </div>
                 <div className="col-10 p-0">
                     <div className='d-flex flex-column'>
-                        <div className='d-flex justify-content-end p-3'>
-                            <div className='d-flex justify-content-between align-items-center'>
-                                <label className='col-4'>Search</label>
-                                <input type="text" className="w-100 form-control" />
-                            </div>
+                        <div className='d-flex justify-content-end p-3 gap-3'>
+                            <form class="d-flex" role="search">
+                                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"></input>
+                                <button class="btn btn-outline-success" type="submit">Search</button>
+                            </form>
 
 
                             <div className="dropdown">
