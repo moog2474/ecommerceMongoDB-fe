@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 export default function Users() {
     const [user, setUser] = useState([])
     const [err, setError] = useState("")
+    const [deleteUser, setDeleteUser] = useState([])
 
 
 
@@ -17,6 +18,20 @@ export default function Users() {
             .catch((err) => setError(console.log(err)))
     }, [])
 
+
+
+    const deleteTask = (id) => {
+        fetch(`http://localhost:8000/api/users/${id}`, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+        })
+            .then(res => res.json())
+            .then((data) => {
+                console.log(data.result);
+            })
+            .catch((err) => setError(console.log(err)))
+      
+    };
     return (
         <div>
             <h2 className='col-2 d-flex m-2'>
@@ -46,7 +61,10 @@ export default function Users() {
                                                 <td className='col-2'>{userType}</td>
                                                 <td className="col-2">
                                                     <button className="btn btn-warning">Edit</button>
-                                                    <button className="btn btn-danger">Delete</button>
+                                                    <button
+                                                        className="btn btn-danger"
+                                                        onClick={()=>deleteTask(_id)}
+                                                    >Delete</button>
                                                 </td>
                                             </tr>
                                         )

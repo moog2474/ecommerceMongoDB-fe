@@ -38,7 +38,7 @@ export default function Modal() {
                 <input type='text' className='w-100 form-contol bo' placeholder='Username' value={obj.userName} onChange={(e) => setObj({ ...obj, userName: e.target.value })}></input>
                 <input type='text' className='w-100 form-contol bo' placeholder='Firstname' value={obj.firstName} onChange={(e) => setObj({ ...obj, firstName: e.target.value })}></input>
                 <input type='text' className='w-100 form-contol bo' placeholder='Lastname' value={obj.lastName} onChange={(e) => setObj({ ...obj, lastName: e.target.value })}></input>
-                <input type='text' className='w-100 form-contol bo' placeholder='User type' value={obj.userType} onChange={(e) => setObj({ ...obj, userType: e.target.value })}></input>
+                <input type='text' className='w-100 form-contol bo' placeholder='User type' value={obj.userType.toLowerCase()} onChange={(e) => setObj({ ...obj, userType: e.target.value })}></input>
                 <input type='text' className='w-100 form-contol bo' placeholder='Password' value={obj.password} onChange={(e) => setObj({ ...obj, password: e.target.value })}></input>
             </form>
             <div className='footer'>

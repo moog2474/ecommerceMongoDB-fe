@@ -14,7 +14,7 @@ export default function AdminLayout() {
             .then((dt) => {
                 console.log(dt.result);
                 setData(dt.result)
-            })
+            })  
             .catch((err) => setErr(console.log(err)))
     }, []);
 
