@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useNavigation } from 'react-router-dom'
+
 
 export default function Modal() {
     const init = {
@@ -26,6 +26,7 @@ export default function Modal() {
             .then((data) => {
                 console.log(data.result)
                 setObj(init)
+                
             })
             .catch((err) => setError(console.log(err)))
     }

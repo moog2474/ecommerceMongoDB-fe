@@ -28,6 +28,7 @@ export default function Users() {
             .then(res => res.json())
             .then((data) => {
                 console.log(data.result);
+                setUser(data.result)
             })
             .catch((err) => setError(console.log(err)))
       
@@ -51,7 +52,7 @@ export default function Users() {
                             </thead>
                             <tbody>
                                 {
-                                    user.map(({ _id, userName, firstName, lastName, userType }, index) => {
+                                    user.map(({ id, userName, firstName, lastName, userType }, index) => {
                                         return (
                                             <tr key={index}>
                                                 <td className='col-2'>{index + 1}</td>
@@ -63,7 +64,7 @@ export default function Users() {
                                                     <button className="btn btn-warning">Edit</button>
                                                     <button
                                                         className="btn btn-danger"
-                                                        onClick={()=>deleteTask(_id)}
+                                                        onClick={()=>deleteTask(id)}
                                                     >Delete</button>
                                                 </td>
                                             </tr>
