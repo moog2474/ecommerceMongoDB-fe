@@ -1,10 +1,23 @@
 import React, { useEffect, useState } from 'react'
-import Modal from './Modal'
 import { Link } from 'react-router-dom'
+import Modal from './Modal'
+
 export default function Users() {
+    const init = {
+        id: '',
+        userName: '',
+        firstName: '',
+        lastName: '',
+        password: '',
+        userType: ''
+    }
+
     const [user, setUser] = useState([])
     const [err, setError] = useState("")
-    const [deleteUser, setDeleteUser] = useState([])
+    const [modal, setModal] = useState(false)
+
+
+
 
 
 
@@ -31,12 +44,27 @@ export default function Users() {
                 setUser(data.result)
             })
             .catch((err) => setError(console.log(err)))
-      
+
     };
+    // const editTask = (id) => {
+    //     fetch(`http://localhost:8000/api/users/${id}`, {
+    //         method: 'PUT',
+    //         headers: { 'Content-Type': 'application/json' },
+    //         body: JSON.stringify(obj)
+    //     })
+    //         .then(res => res.json())
+    //         .then((data) => {
+    //             console.log(data.result);
+    //             setUser(data.result)
+    //         })
+    //         .catch((err) => setError(console.log(err)))
+
+    // };
     return (
         <div>
             <h2 className='col-2 d-flex m-2'>
-                <button className="btn btn-primary mt-2"><Link to="/adduser">add user</Link></button>
+                <button
+                    onClick={() => setModal(!modal)} className="btn btn-primary mt-2">Add user</button>
             </h2>
             <div className="row my-4">
                 <div className="row w-100">
@@ -61,10 +89,13 @@ export default function Users() {
                                                 <td className='col-2'>{lastName}</td>
                                                 <td className='col-2'>{userType}</td>
                                                 <td className="col-2">
-                                                    <button className="btn btn-warning">Edit</button>
+                                                    <button
+                                                        className="btn btn-warning"
+
+                                                    >Edit</button>
                                                     <button
                                                         className="btn btn-danger"
-                                                        onClick={()=>deleteTask(id)}
+                                                        onClick={() => deleteTask(id)}
                                                     >Delete</button>
                                                 </td>
                                             </tr>
@@ -74,8 +105,16 @@ export default function Users() {
                             </tbody>
                         </table>
                     </div>
+
+                    <Modal
+                        setModal={setModal}
+                        modal={modal}
+                    />
                 </div>
+
+
             </div>
+
         </div>
     )
 }

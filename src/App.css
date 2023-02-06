@@ -54,3 +54,25 @@ a {
   border-bottom: 2px solid salmon;
   outline: none;
 }
+
+.modal {
+  z-index: 1;
+  /* display: fixed; */
+  top: 0;
+  left: 0;
+  display: none;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(137, 135, 135);
+}
+
+.modal-dialog {
+  padding: 40px 50px;
+  width: 600px;
+  border-radius: 30px;
+  margin: 100px auto;
+  justify-content: center;
+  background-color: white;
+  box-shadow: 0 5px 10px rgb(51, 50, 50);
+  position: relative;
+}

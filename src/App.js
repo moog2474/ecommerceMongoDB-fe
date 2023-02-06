@@ -3,8 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import AdminLayout from './components/admin/AdminLayout';
 import Dashboard from './components/admin/Dashboard';
 import Users from './components/admin/Users';
-import Modal from './components/admin/Modal'
-import ProductNew from './components/admin/ProductNew';
+import ProductList from './components/admin/ProductList'
 import './App.css';
 
 function App() {
@@ -15,8 +14,9 @@ function App() {
           <Route index path="/" element='hi' />
           <Route path='/dashboard' element={<Dashboard />}></Route>
           <Route path='/users' element={<Users />} />
-          <Route path='/adduser' element={<Modal />} />
-          <Route path='/products' element={<ProductNew />} />
+          {/* <Route path='/adduser' element={<Modal />} /> */}
+          {/* <Route path='/addproduct' element={<ProductNew />} /> */}
+          <Route path='/products' element={<ProductList />} />
 
         </Route>
       </Routes>
