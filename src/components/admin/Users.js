@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import Modal from './Modal'
+import UserNew from './UserNew'
 
 export default function Users() {
     const init = {
@@ -46,20 +46,20 @@ export default function Users() {
             .catch((err) => setError(console.log(err)))
 
     };
-    // const editTask = (id) => {
-    //     fetch(`http://localhost:8000/api/users/${id}`, {
-    //         method: 'PUT',
-    //         headers: { 'Content-Type': 'application/json' },
-    //         body: JSON.stringify(obj)
-    //     })
-    //         .then(res => res.json())
-    //         .then((data) => {
-    //             console.log(data.result);
-    //             setUser(data.result)
-    //         })
-    //         .catch((err) => setError(console.log(err)))
+    const editTask = (id) => {
+        fetch(`http://localhost:8000/api/users/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then((data) => {
+                console.log(data.result);
+                setUser(data.result)
+            })
+            .catch((err) => setError(console.log(err)))
 
-    // };
+    };
     return (
         <div>
             <h2 className='col-2 d-flex m-2'>
@@ -91,7 +91,7 @@ export default function Users() {
                                                 <td className="col-2">
                                                     <button
                                                         className="btn btn-warning"
-
+                                                        onClick={editTask}
                                                     >Edit</button>
                                                     <button
                                                         className="btn btn-danger"
@@ -106,7 +106,7 @@ export default function Users() {
                         </table>
                     </div>
 
-                    <Modal
+                    <UserNew
                         setModal={setModal}
                         modal={modal}
                     />
