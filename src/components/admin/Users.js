@@ -3,23 +3,12 @@ import { Link } from 'react-router-dom'
 import UserNew from './UserNew'
 
 export default function Users() {
-    const init = {
-        id: '',
-        userName: '',
-        firstName: '',
-        lastName: '',
-        password: '',
-        userType: ''
-    }
 
     const [user, setUser] = useState([])
     const [err, setError] = useState("")
     const [modal, setModal] = useState(false)
-
-
-
-
-
+    const [isEdited, setIsedited] = useState(false)
+    const [myId, setMyId] = useState('')
 
     useEffect(() => {
         fetch("http://localhost:8000/api/users")
@@ -30,8 +19,6 @@ export default function Users() {
             })
             .catch((err) => setError(console.log(err)))
     }, [])
-
-
 
     const deleteTask = (id) => {
         fetch(`http://localhost:8000/api/users/${id}`, {
@@ -47,18 +34,9 @@ export default function Users() {
 
     };
     const editTask = (id) => {
-        fetch(`http://localhost:8000/api/users/${id}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(user)
-        })
-            .then(res => res.json())
-            .then((data) => {
-                console.log(data.result);
-                setUser(data.result)
-            })
-            .catch((err) => setError(console.log(err)))
-
+        setModal(!modal)
+        setIsedited(!isEdited)
+        setMyId(id)
     };
     return (
         <div>
@@ -91,7 +69,7 @@ export default function Users() {
                                                 <td className="col-2">
                                                     <button
                                                         className="btn btn-warning"
-                                                        onClick={editTask}
+                                                        onClick={() => editTask(id)}
                                                     >Edit</button>
                                                     <button
                                                         className="btn btn-danger"
@@ -109,6 +87,10 @@ export default function Users() {
                     <UserNew
                         setModal={setModal}
                         modal={modal}
+                        isEdited={isEdited}
+                        setIsedited={setIsedited}
+                        myId={myId}
+                        setUser={setUser}
                     />
                 </div>
 

@@ -18,6 +18,8 @@ export default function ProductList() {
     const [product, setProduct] = useState([])
     const [err, setErr] = useState("")
     const [modalProduct, setModalProduct] = useState(false)
+    const [isEdited, setIsEdited] = useState(false)
+    const [getId, setGetId] = useState('')
 
 
     useEffect(() => {
@@ -29,6 +31,12 @@ export default function ProductList() {
             })
             .catch((err) => setErr(console.log(err)))
     }, [])
+
+    const editTask = (id) => {
+        setModalProduct(!modalProduct)
+        setIsEdited(!isEdited)
+        setGetId(id)
+    }
 
     const deleteTask = (id) => {
         fetch(`http://localhost:8000/api/products/${id}`, {
@@ -43,6 +51,7 @@ export default function ProductList() {
             .catch((err) => setErr(console.log(err)))
 
     };
+
     return (
         <div>
             <h2 className='col-2 d-flex m-2'>
@@ -76,9 +85,10 @@ export default function ProductList() {
                                                 <td className='col-1'>{quantity}</td>
                                                 <td className='col-1'>{discount}%</td>
                                                 <td className='col-1'>{description}</td>
-                                                <td className="col-1 d-flex justify-content-between gap-2">
+                                                <td className="col-1 d-flex w-100 justify-content-center gap-2">
                                                     <span
-                                                    ><AiFillEdit /></span>
+                                                    ><AiFillEdit
+                                                            onClick={() => { editTask(id) }} /></span>
                                                     <span
                                                         onClick={() => deleteTask(id)}
                                                     ><AiFillDelete /></span>
@@ -95,6 +105,10 @@ export default function ProductList() {
             <ProductNew
                 modalProduct={modalProduct}
                 setModalProduct={setModalProduct}
+                isEdited={isEdited}
+                setIsEdited={setIsEdited}
+                getId={getId}
+                setProduct={setProduct}
             />
         </div>
     )
