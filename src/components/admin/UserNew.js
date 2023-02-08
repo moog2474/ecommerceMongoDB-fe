@@ -14,12 +14,11 @@ export default function UserNew({ modal, setModal, isEdited, setIsedited, myId, 
     }
 
     function getDataId() {
-        console.log('hi')
         fetch(`http://localhost:8000/api/users/${myId}`)
             .then(res => res.json())
             .then((data) => {
-                console.log(data.result)
-                setObj(data.result[0])
+                console.log(data.result);
+                setObj(data.result[0]);
             })
             .catch((err) => console.log(err))
     }
@@ -43,7 +42,6 @@ export default function UserNew({ modal, setModal, isEdited, setIsedited, myId, 
 
     const [err, setError] = useState('')
     const [obj, setObj] = useState([])
-
 
 
     const addTask = () => {
