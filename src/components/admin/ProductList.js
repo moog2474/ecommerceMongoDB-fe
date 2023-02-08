@@ -15,7 +15,7 @@ export default function ProductList() {
         quantity: 0,
         description: ''
     }
-    const [product, setProduct] = useState([])
+    const [products, setProducts] = useState([])
     const [err, setErr] = useState("")
     const [modalProduct, setModalProduct] = useState(false)
     const [isEdited, setIsEdited] = useState(false)
@@ -23,11 +23,11 @@ export default function ProductList() {
 
 
     useEffect(() => {
-        fetch("http://localhost:8000/api/products")
+        fetch("http://localhost:8000/be/products")
             .then((response) => response.json())
             .then((dt) => {
                 console.log(dt.result);
-                setProduct(dt.result);
+                setProducts(dt.result);
             })
             .catch((err) => setErr(console.log(err)))
     }, [])
@@ -38,15 +38,15 @@ export default function ProductList() {
         setGetId(id)
     }
 
-    const deleteTask = (id) => {
-        fetch(`http://localhost:8000/api/products/${id}`, {
+    const deleteProduct = (id) => {
+        fetch(`http://localhost:8000/be/products/${id}`, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
         })
             .then(res => res.json())
             .then((data) => {
                 console.log(data.result);
-                setProduct(data.result)
+                setProducts(data.result)
             })
             .catch((err) => setErr(console.log(err)))
 
@@ -74,7 +74,7 @@ export default function ProductList() {
                             </thead>
                             <tbody>
                                 {
-                                    product.map(({ id, productName, categoryId, price, createdUser, quantity, discount, description }, index) => {
+                                    products.map(({ id, productName, categoryId, price, createdUser, quantity, discount, description }, index) => {
                                         return (
                                             <tr key={index}>
                                                 <td className='col-1'>{index + 1}</td>
@@ -88,9 +88,11 @@ export default function ProductList() {
                                                 <td className="col-1 d-flex w-100 justify-content-center gap-2">
                                                     <span
                                                     ><AiFillEdit
+                                                            size={20}
                                                             onClick={() => { editTask(id) }} /></span>
                                                     <span
-                                                        onClick={() => deleteTask(id)}
+                                                        size={20}
+                                                        onClick={() => deleteProduct(id)}
                                                     ><AiFillDelete /></span>
                                                 </td>
                                             </tr>
@@ -108,7 +110,7 @@ export default function ProductList() {
                 isEdited={isEdited}
                 setIsEdited={setIsEdited}
                 getId={getId}
-                setProduct={setProduct}
+                setProducts={setProducts}
             />
         </div>
     )

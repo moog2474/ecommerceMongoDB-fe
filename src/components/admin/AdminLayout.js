@@ -9,12 +9,12 @@ export default function AdminLayout() {
     const [err, setErr] = useState("");
 
     useEffect(() => {
-        fetch("http://localhost:8000/api/menu")
+        fetch("http://localhost:8000/be/menu")
             .then((response) => response.json())
             .then((dt) => {
                 console.log(dt.result);
                 setData(dt.result)
-            })  
+            })
             .catch((err) => setErr(console.log(err)))
     }, []);
 
@@ -23,11 +23,14 @@ export default function AdminLayout() {
 
         <div className=''>
             <div className='d-flex row'>
-                <div className='pop col-2 bg-primary'>
-                    <span>OS Admin</span>
+                <div className='col-2 d-flex flex-column p-2 bg-primary'>
+                    <div className='mb-5'>
+                        <span >OS Admin</span>
+
+                    </div>
                     {data.map((e) => {
                         if (e.type === "adminMenu") {
-                            return <div className='d-flex flex-column'>
+                            return <div className='d-flex flex-column text-start ms-2 p-3 border-bottom'>
                                 <Link to={`/${e.menuName.toLowerCase()}`}>{e.menuName}</Link>
                             </div>
 

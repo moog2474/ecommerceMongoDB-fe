@@ -5,36 +5,36 @@ import UserNew from './UserNew'
 
 export default function Users() {
 
-    const [user, setUser] = useState([])
+    const [users, setUsers] = useState([])
     const [err, setError] = useState("")
     const [modal, setModal] = useState(false)
     const [isEdited, setIsedited] = useState(false)
     const [myId, setMyId] = useState('')
 
     useEffect(() => {
-        fetch("http://localhost:8000/api/users")
+        fetch("http://localhost:8000/be/users")
             .then((response) => response.json())
             .then((dt) => {
                 console.log(dt.result);
-                setUser(dt.result);
+                setUsers(dt.result);
             })
             .catch((err) => setError(console.log(err)))
     }, [])
 
-    const deleteTask = (id) => {
-        fetch(`http://localhost:8000/api/users/${id}`, {
+    const deleteUser = (id) => {
+        fetch(`http://localhost:8000/be/users/${id}`, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
         })
             .then(res => res.json())
             .then((data) => {
                 console.log(data.result);
-                setUser(data.result)
+                setUsers(data.result)
             })
             .catch((err) => setError(console.log(err)))
 
     };
-    const editTask = (id) => {
+    const editUser = (id) => {
         setModal(!modal)
         setIsedited(!isEdited)
         setMyId(id)
@@ -43,7 +43,7 @@ export default function Users() {
         <div>
             <h2 className='col-2 d-flex m-2'>
                 <button
-                    onClick={() => setModal(!modal)} className="btn btn-primary mt-2">Add user</button>
+                    onClick={() => setModal(!modal)} className="btn btn-primary mt-2">Add users</button>
             </h2>
             <div className="row my-4">
                 <div className="row w-100">
@@ -59,7 +59,7 @@ export default function Users() {
                             </thead>
                             <tbody>
                                 {
-                                    user.map(({ id, userName, firstName, lastName, userType }, index) => {
+                                    users.map(({ id, userName, firstName, lastName, userType }, index) => {
                                         return (
                                             <tr key={index}>
                                                 <td className='col-2'>{index + 1}</td>
@@ -70,11 +70,11 @@ export default function Users() {
                                                 <td className="col-2">
                                                     <button
                                                         className="btn btn-warning"
-                                                        onClick={() => editTask(id)}
+                                                        onClick={() => editUser(id)}
                                                     >Edit</button>
                                                     <button
                                                         className="btn btn-danger"
-                                                        onClick={() => deleteTask(id)}
+                                                        onClick={() => deleteUser(id)}
                                                     >Delete</button>
                                                 </td>
                                             </tr>
@@ -91,7 +91,7 @@ export default function Users() {
                         isEdited={isEdited}
                         setIsedited={setIsedited}
                         myId={myId}
-                        setUser={setUser}
+                        setUsers={setUsers}
                     />
                 </div>
 

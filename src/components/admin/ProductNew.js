@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 
 
-export default function ProductNew({ modalProduct, setModalProduct, getId, isEdited, setIsEdited, setProduct }) {
 
-    const axios = require('axios')
+export default function ProductNew({ modalProduct, setModalProduct, getId, isEdited, setIsEdited, setProducts }) {
+
 
     const init = {
         productName: '',
@@ -15,78 +16,85 @@ export default function ProductNew({ modalProduct, setModalProduct, getId, isEdi
         quantity: 0,
         description: ''
     }
-    const [obj, setObj] = useState([])
+    const [product, setProduct] = useState(init)
     const [err, setErr] = useState('')
     const [user, setUser] = useState([])
+    const [loading, setLoading] = useState(false)
+
 
 
     function getData() {
-        fetch('http://localhost:8000/api/products')
+        fetch('http://localhost:8000/be/products')
             .then(res => res.json())
             .then((data) => {
                 console.log(data)
-                setProduct(data.result)
+                setProducts(data.result)
             })
     }
 
+
     function getDataId() {
-        fetch(`http://localhost:8000/api/products/${getId}`)
+        fetch(`http://localhost:8000/be/products/${getId}`)
             .then(res => res.json())
             .then((data) => {
                 console.log(data.result)
-                setObj(data.result[0])
+                setProduct(data.result[0])
             })
             .catch((err) => console.log(err))
     }
-    useEffect(() => {
-        if (isEdited === true) {
-            getDataId()
-        } else {
-            setObj(init)
-        }
-    }, [isEdited])
+
 
     useEffect(() => {
-        fetch("http://localhost:8000/api/users")
+        fetch("http://localhost:8000/be/users")
             .then((response) => response.json())
             .then((dt) => {
-                console.log(dt.result);
                 setUser(dt.result);
             })
             .catch((err) => setErr(console.log(err)))
     }, [])
 
 
-    const addTask = () => {
+    useEffect(() => {
+        if (isEdited === true) {
+            getDataId()
+        } else {
+            setProduct(init)
+        }
+    }, [isEdited])
+
+
+    const addProduct = () => {
         isEdited ?
-            fetch("http://localhost:8000/api/products", {
+            fetch(`http://localhost:8000/be/products/${getId}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(obj)
+                body: JSON.stringify(product)
             })
                 .then(res => res.json())
                 .then((data) => {
                     console.log(data.result)
-                    setObj(init)
+                    setProduct(init)
                     getData()
                 })
                 .catch((err) => setErr(console.log(err)))
             :
-            fetch("http://localhost:8000/api/products", {
+            fetch("http://localhost:8000/be/products", {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(obj)
+                body: JSON.stringify(product)
             })
                 .then(res => res.json())
                 .then((data) => {
                     console.log(data.result)
-                    setObj(init)
+                    setProduct(init)
                     getData()
                 })
                 .catch((err) => setErr(console.log(err)))
     }
 
     const sendFile = async (fieldName, files) => {
+        setLoading(true)
+
         console.log(files);
         const url = `https://api.cloudinary.com/v1_1/dnpeugfk4/upload`
         const newArr = []
@@ -114,20 +122,15 @@ export default function ProductNew({ modalProduct, setModalProduct, getId, isEdi
         });
 
         if (fieldName == "images") {
-            setProductItem({
-                ...productItem,
-                images: arr,
-            });
+            setProduct({ ...product, images: arr })
         }
         else {
-            setProductItem({
-                ...productItem,
-                thumbimage: arr[0],
-            });
+            setProduct({ ...product, thumbimage: arr[0] })
         }
+        setLoading(false)
     }
 
-    const [productItem, setProductItem] = useState(init)
+
 
     return (
         <div className="modal" style={{ display: modalProduct ? "block" : "none" }}>
@@ -143,35 +146,35 @@ export default function ProductNew({ modalProduct, setModalProduct, getId, isEdi
 
                     <div className='col d-flex gap-3 mb-2 justify-content-between'>
                         <label>Product Name</label>
-                        <input className='w-75' value={obj?.productName} type='text'
+                        <input className='w-75' value={product?.productName} type='text'
                             onChange={(e) =>
-                                setObj({ ...obj, productName: e.target.value })}></input>
+                                setProduct({ ...product, productName: e.target.value })}></input>
                     </div>
 
                     <div className='col d-flex gap-3 mb-2 justify-content-between'>
                         <label>Discount</label>
-                        <input className='w-75' value={obj?.discount} type="number"
+                        <input className='w-75' value={product?.discount} type="number"
                             onChange={(e) =>
-                                setObj({ ...obj, discount: e.target.value })}></input>
+                                setProduct({ ...product, discount: e.target.value })}></input>
                     </div>
 
                     <div className='col d-flex gap-3 mb-2 justify-content-between'>
                         <label>Price</label>
-                        <input className='w-75' value={obj?.price} type='number'
+                        <input className='w-75' value={product?.price} type='number'
                             onChange={(e) =>
-                                setObj({ ...obj, price: e.target.value })}></input>
+                                setProduct({ ...product, price: e.target.value })}></input>
                     </div>
 
                     <div className='col d-flex gap-3 mb-2 justify-content-between'>
                         <label>Quantity</label>
-                        <input className='w-75' value={obj?.quantity} type='number'
-                            onChange={(e) => setObj({ ...obj, quantity: e.target.value })}></input>
+                        <input className='w-75' value={product?.quantity} type='number'
+                            onChange={(e) => setProduct({ ...product, quantity: e.target.value })}></input>
                     </div>
 
-                    <div className='col d-flex gap-5 mb-2 justify-content-between'>
-                        <div className='d-flex justify-content-between col-5'>
+                    <div className='col gap-5 mb-2 justify-content-between'>
+                        <div className='d-flex justify-content-between col-12 mb-2 mt-2'>
                             <label>Thumbnail</label>
-                            <input className='w-50' value={obj?.thumbimage} type='file'
+                            <input className='w-50' type='file'
                                 onChange={(e) => {
                                     console.log(e.target.files)
                                     const arr = []
@@ -179,12 +182,17 @@ export default function ProductNew({ modalProduct, setModalProduct, getId, isEdi
                                     sendFile("thumbimage", arr)
 
                                 }}
-                            ></input>
+                            >
+
+                            </input>
+                            {loading ? <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div> : ''}
+
                         </div>
-                        <div className='d-flex justify-content-between col-5'>
+                        <div className='d-flex justify-content-between col-12 mt-2 mb-2'>
                             <label>Images</label>
                             <input className='w-50'
-                                value={obj?.images}
                                 type='file'
                                 multiple
                                 onChange={(e) => {
@@ -195,12 +203,15 @@ export default function ProductNew({ modalProduct, setModalProduct, getId, isEdi
                                     sendFile("images", arr)
                                 }}
                             ></input>
+                            {loading ? <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div> : ''}
                         </div>
                     </div>
                     <div className='col d-flex gap-3 mb-2 justify-content-between'>
                         <label>Created user</label>
-                        <select className='w-75' value={obj?.createdUser}
-                            onChange={(e) => setObj({ ...obj, createdUser: e.target.value })}>
+                        <select className='w-75' value={product?.createdUser}
+                            onChange={(e) => setProduct({ ...product, createdUser: e.target.value })}>
                             <option value='0'>select</option>
                             {user?.map((e, index) => {
                                 if (e.userType == "admin") {
@@ -216,16 +227,16 @@ export default function ProductNew({ modalProduct, setModalProduct, getId, isEdi
                     </div>
                     <div className='col d-flex gap-3 mb-2 justify-content-between'>
                         <label>Description</label>
-                        <textarea className='w-75' value={obj?.description}
-                            onChange={(e) => setObj({ ...obj, description: e.target.value })}></textarea>
+                        <textarea className='w-75' value={product?.description}
+                            onChange={(e) => setProduct({ ...product, description: e.target.value })}></textarea>
                     </div>
                     <button onClick={() => {
-                        addTask()
+                        addProduct()
                         setModalProduct(false)
                     }} className='btn btn-primary'>save</button>
                 </div>
             </div>
-        </div>
+        </div >
 
     )
 }

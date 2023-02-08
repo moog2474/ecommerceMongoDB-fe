@@ -6,7 +6,7 @@ export default function Menu() {
     const [menu, setMenu] = useState([])
 
     useEffect(() => {
-        fetch("http://localhost:8000/api/menu")
+        fetch("http://localhost:8000/be/menu")
             .then(res => res.json())
             .then((data) => {
                 console.log(data.result);
@@ -39,9 +39,9 @@ export default function Menu() {
                                     <td className='col-1'>{index + 1}</td>
                                     <td className='col-2'>{menuName}</td>
                                     <td className='col-1'>{position}</td>
-                                    <td className='col-1'>
-                                        <AiFillEdit />
-                                        <AiFillDelete />
+                                    <td className='col-1 d-flex w-100 justify-content-center gap-3'>
+                                        <AiFillEdit size={20} />
+                                        <AiFillDelete size={20} />
                                     </td>
                                 </tr>)
 
