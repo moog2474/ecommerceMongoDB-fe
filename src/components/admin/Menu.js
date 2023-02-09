@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai'
+import MenuNew from './MenuNew'
+
 
 export default function Menu() {
 
     const [menu, setMenu] = useState([])
+    const [modal, setModal] = useState(false)
+    const [isEdited, setIsEdited] = useState(false)
+    const [getMenuId, setGetMenuId] = useState('')
 
     useEffect(() => {
         fetch("http://localhost:8000/be/menu")
@@ -11,9 +16,31 @@ export default function Menu() {
             .then((data) => {
                 console.log(data.result);
                 setMenu(data.result)
+                setMenu(data.result.filter((a) => a.type === "adminMenu"))
             })
             .catch((err) => console.log(err))
     }, [])
+
+    deleteMenu = (id) => {
+        fetch(`http://localhost:8000/be/menu/${id}`, {
+            method: "DELETE",
+            headers: { "Content-type": "application/json" },
+        })
+            .then(res => res.json())
+            .then((data) => {
+                console.log(data.result);
+                setMenu(data.result)
+            })
+            .catch((err) => console.log(err))
+    }
+
+    const editMenu = (id) => {
+        setModal(!modal)
+        setIsEdited(!isEdited)
+        getMenuId(id)
+    }
+
+
 
     return (
         <div>
@@ -32,16 +59,18 @@ export default function Menu() {
                         </tr>
                     </thead>
                     <tbody>
-                        {menu.map(({ menuName, position }, index) => {
-
+                        {menu.map(({ menuName, position, id }, index) => {
                             return (
                                 <tr key={index}>
                                     <td className='col-1'>{index + 1}</td>
                                     <td className='col-2'>{menuName}</td>
                                     <td className='col-1'>{position}</td>
                                     <td className='col-1 d-flex w-100 justify-content-center gap-3'>
-                                        <AiFillEdit size={20} />
-                                        <AiFillDelete size={20} />
+                                        <AiFillEdit
+                                            onClick={() => editMenu(id)}
+                                            size={20} />
+                                        <AiFillDelete
+                                            onClick={() => deleteMenu(id)} size={20} />
                                     </td>
                                 </tr>)
 
@@ -49,6 +78,13 @@ export default function Menu() {
                         })}
                     </tbody>
                 </table>
+
+                <MenuNew
+                    modal={modal}
+                    setModal={setModal}
+                    setIsEdited={setIsEdited}
+                    getMenuId={getMenuId}
+                />
             </div>
 
         </div>
