@@ -46,7 +46,7 @@ export default function UserNew({ modal, setModal, isEdited, setIsedited, myId, 
 
     const addUser = () => {
         isEdited ?
-            fetch("http://localhost:8000/be/users", {
+            fetch(`http://localhost:8000/be/users/${myId}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(user)

@@ -24,6 +24,15 @@
   color: white;
 }
 
+body {
+  margin: 0
+}
+
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
 .App-link {
   color: #61dafb;
 }
@@ -63,7 +72,7 @@ a {
   width: 100%;
   height: 100%;
   background-color: rgb(137, 135, 135);
-} 
+}
 
 .body {
   padding: 40px 50px;

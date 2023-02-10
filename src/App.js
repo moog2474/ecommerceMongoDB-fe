@@ -5,24 +5,26 @@ import Dashboard from './components/admin/Dashboard';
 import Users from './components/admin/Users';
 import ProductList from './components/admin/ProductList'
 import Menu from './components/admin/Menu';
+import Header from './components/Header'
 import './App.css';
 
 function App() {
   return (
     <div className="App">
       <Routes>
-        <Route element={<AdminLayout />}>
-          <Route index path="/" element='hi' />
-          <Route path='/dashboard' element={<Dashboard />}></Route>
-          <Route path='/users' element={<Users />} />
-          <Route path='/menu' element={<Menu />} />
-          {/* <Route path='/adduser' element={<Modal />} /> */}
-          {/* <Route path='/addproduct' element={<ProductNew />} /> */}
-          <Route path='/products' element={<ProductList />} />
-
+        <Route element={<Header />}>
+          <Route index path="/" element={<Header />} />
         </Route>
       </Routes>
-    </div>
+      <Routes>
+        <Route element={<AdminLayout />}>
+          <Route index path='/dashboard' element={<Dashboard />}></Route>
+          <Route path='/users' element={<Users />} />
+          <Route path='/menu' element={<Menu />} />
+          <Route path='/products' element={<ProductList />} />
+        </Route>
+      </Routes>
+    </div >
   );
 }
 

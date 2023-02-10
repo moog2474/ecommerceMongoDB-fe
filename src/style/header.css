@@ -1,0 +1,18 @@
+ul {
+    list-style: none;
+}
+
+.navi {
+    height: 120px;
+    padding: 44px 0;
+
+}
+
+li {
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.border-bottom {
+    border-bottom: 3px solid #F3F3F3;
+}
