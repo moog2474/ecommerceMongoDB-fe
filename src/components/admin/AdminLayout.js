@@ -25,7 +25,7 @@ export default function AdminLayout() {
             <div className='d-flex row'>
                 <div className='col-2 d-flex flex-column p-2 bg-primary'>
                     <div className='mb-5'>
-                        <span >OS Admin</span>
+                        <span>OS Admin</span>
 
                     </div>
                     {data.map((e) => {

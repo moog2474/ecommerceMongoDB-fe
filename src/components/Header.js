@@ -25,12 +25,12 @@ export default function Header() {
               <li className='col-2'>
                 <img src={require("../images/logo.png")} />
               </li>
-              <li className='col-4 gap-2 d-flex align-items-center'>
+              <li className='col-5 gap-2 d-flex align-items-center'>
 
                 {menu.map(({ menuName }) => {
                   return (
                     <ul className='d-flex justify-content-between'>
-                      <li>{menuName}</li>
+                      <li><span>{menuName}</span></li>
                     </ul>
                   )
                 })}
