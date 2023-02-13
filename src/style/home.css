@@ -1,0 +1,77 @@
+.one {
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+
+h1 {
+    font-size: 4rem;
+    font-weight: 700;
+}
+
+.orange {
+    font-size: 18px;
+    color: rgba(255, 178, 63, 1);
+    font-weight: 700;
+}
+
+.input {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.input input {
+    width: 60vw;
+    padding: 10px;
+}
+
+.input button {
+    background-color: rgb(81, 133, 129);
+    padding: 10px;
+    color: white;
+    width: 170px;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+    text-align: start;
+}
+
+h2 {
+    font-size: 44px;
+}
+
+.flex p {
+    color: rgba(175, 173, 181, 1);
+    font-size: 19px;
+}
+
+.three {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    text-align: start;
+}
+
+.three .col-4 {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 23px 26px;
+    background-color: rgb(217, 232, 241);
+}
+
+.three .col-4 img {
+    width: 62px;
+    height: 62px;
+}
+
+.center {
+    width: 50vw;
+}

@@ -52,8 +52,14 @@ body {
   background-color: #61dafb;
 }
 
-a {
+.lol a {
   color: white;
+  text-decoration: none;
+}
+
+.foot a {
+  color: black;
+  margin-bottom: 16px;
   text-decoration: none;
 }
 

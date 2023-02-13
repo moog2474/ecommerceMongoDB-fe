@@ -26,11 +26,10 @@ export default function AdminLayout() {
                 <div className='col-2 d-flex flex-column p-2 bg-primary'>
                     <div className='mb-5'>
                         <span>OS Admin</span>
-
                     </div>
                     {data.map((e) => {
                         if (e.type === "adminMenu") {
-                            return <div className='d-flex flex-column text-start ms-2 p-3 border-bottom'>
+                            return <div className='d-flex flex-column text-start ms-2 p-3 border-bottom lol'>
                                 <Link to={`/${e.menuName.toLowerCase()}`}>{e.menuName}</Link>
                             </div>
 

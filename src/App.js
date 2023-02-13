@@ -5,15 +5,16 @@ import Dashboard from './components/admin/Dashboard';
 import Users from './components/admin/Users';
 import ProductList from './components/admin/ProductList'
 import Menu from './components/admin/Menu';
-import Header from './components/Header'
 import './App.css';
+import Main from './pages/Main';
+import LoginModal from './pages/LoginModal';
 
 function App() {
   return (
     <div className="App">
       <Routes>
-        <Route element={<Header />}>
-          <Route index path="/" element={<Header />} />
+        <Route element={<Main />}>
+          <Route index path="/" element={<Main />} />
         </Route>
       </Routes>
       <Routes>
