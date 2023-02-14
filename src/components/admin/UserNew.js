@@ -10,7 +10,8 @@ export default function UserNew({ modal, setModal, isEdited, setIsedited, myId, 
         firstName: '',
         lastName: '',
         password: '',
-        userType: ''
+        userType: '',
+        email: ''
     }
 
 
@@ -84,11 +85,14 @@ export default function UserNew({ modal, setModal, isEdited, setIsedited, myId, 
                     }} aria-label="Close"></button>
                 </div>
                 <form className='d-flex flex-column gap-3 mb-3'>
-                    <input type='text' className='w-100 form-contol bo' placeholder='Username' value={user?.userName} onChange={(e) => setUser({ ...user, userName: e.target.value })}></input>
-                    <input type='text' className='w-100 form-contol bo' placeholder='Firstname' value={user?.firstName} onChange={(e) => setUser({ ...user, firstName: e.target.value })} />
-                    <input type='text' className='w-100 form-contol bo' placeholder='Lastname' value={user?.lastName} onChange={(e) => setUser({ ...user, lastName: e.target.value })}></input>
-                    <input type='text' className='w-100 form-contol bo' placeholder='User type' value={user?.userType} onChange={(e) => setUser({ ...user, userType: e.target.value })}></input>
-                    <input type='text' className='w-100 form-contol bo' placeholder='Password' value={user?.password} onChange={(e) => setUser({ ...user, password: e.target.value })}></input>
+                    <input type='text' className='w-100 form-control bo' placeholder='Username' value={user?.userName} onChange={(e) => setUser({ ...user, userName: e.target.value })}></input>
+                    <div className='d-flex gap-3'>
+                        <input type='text' className='w-100 form-control bo' placeholder='Firstname' value={user?.firstName} onChange={(e) => setUser({ ...user, firstName: e.target.value })} />
+                        <input type='text' className='w-100 form-control bo' placeholder='Lastname' value={user?.lastName} onChange={(e) => setUser({ ...user, lastName: e.target.value })}></input>
+                    </div>
+                    <input type='text' className='w-100 form-control bo' placeholder='E-mail' value={user?.email} onChange={(e) => setUser({ ...user, email: e.target.value })} />
+                    <input type='text' className='w-100 form-control bo' placeholder='User type' value={user?.userType} onChange={(e) => setUser({ ...user, userType: e.target.value })}></input>
+                    <input type='text' className='w-100 form-control bo' placeholder='Password' value={user?.password} onChange={(e) => setUser({ ...user, password: e.target.value })}></input>
                 </form>
                 <div className='modal-footer'>
                     <button onClick={() => {

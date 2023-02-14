@@ -91,3 +91,12 @@ body {
   box-shadow: 0 5px 10px rgb(51, 50, 50);
   position: relative;
 }
+
+.signUp {
+  height: 830px;
+}
+
+.signUp p {
+  margin: 0;
+  text-align: start;
+}
