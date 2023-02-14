@@ -31,7 +31,7 @@ export default function Header() {
 
                 {menu.map(({ menuName }) => {
                   return (
-                    <ul className='d-flex justify-content-between'>
+                    <ul className='d-flex justify-content-between aa'>
                       <li><span>{menuName}</span></li>
                     </ul>
                   )

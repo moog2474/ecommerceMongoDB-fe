@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react'
 
 export default function SignUp({ signUp, setSignUp, setLogin }) {
+    // const password = document.querySelector(".password")
+    // const checkLetter = document.querySelector(".checkLetter")
+    // const checkNumber = document.querySelector(".checkNumber")
+    // const checkSpecial = document.querySelector(".checkSpecial")
+    // const checkMark = document.querySelector(".checkMark")
 
     const init = {
         id: '',
@@ -29,6 +34,47 @@ export default function SignUp({ signUp, setSignUp, setLogin }) {
             })
             .catch((err) => setErr(console.log(err)))
     }
+    // const setColorLetter = (color) => {
+    //     checkLetter.style.color = color;
+    // }
+    // const setColorNumber = (color) => {
+    //     checkNumber.style.color = color;
+    // }
+    // const setColorSpecial = (color) => {
+    //     checkSpecial.style.color = color;
+    // }
+    // const setColorMark = (color) => {
+    //     checkMark.style.color = color;
+    // }
+    // password.addEventListener("keyup", checkPassword)
+    // const checkPassword = () => {
+    //     if (password.length < 7) {
+    //         return false
+    //     }
+    //     if (password.length > 15) {
+    //         return false
+    //     }
+    //     else {
+    //         let lowerCase = password.value.match(/[a-z]/);
+    //         let upperCase = password.value.match(/[A-Z]/);
+    //         let number = password.value.match(/[0-9]/);
+    //         let specialChar = password.value.match(/[\!\~\@\&\#\$\%\^\&\*\(\)\{\}\?\-\_\+\=]/);
+
+    //         if (lowerCase && upperCase) {
+    //             setColorLetter("green")
+    //         }
+    //         if (number) {
+    //             setColorNumber("green")
+    //         }
+    //         if (specialChar) {
+    //             setColorSpecial("green")
+    //         }
+    //         if (password.length > 7 && password.length < 15) {
+    //             setColorMark("green")
+    //         }
+    //     }
+    // }
+
 
     return (
         <div className="modal" style={{ display: signUp ? "block" : "none" }}>
@@ -46,13 +92,13 @@ export default function SignUp({ signUp, setSignUp, setLogin }) {
                     </div>
                     <input type="text" placeholder='Username' value={user.userName} onChange={(e) => setUser({ ...user, userName: e.target.value })}></input>
                     <input type="text" placeholder='E-mail' value={user.email} onChange={(e) => setUser({ ...user, email: e.target.value })}></input>
-                    <input type="text" placeholder='Password' value={user.password} onChange={(e) => setUser({ ...user, password: e.target.value })}></input>
-                    <input type="text" placeholder='Confirm password' value={user.confirmPassword} onChange={(e) => setUser({ ...user, confirmPassword: e.target.value })}></input>
+                    <input className='password' type="text" placeholder='Password' value={user.password} onChange={(e) => setUser({ ...user, password: e.target.value })}></input>
+                    <input className='password' type="text" placeholder='Confirm password' value={user.confirmPassword} onChange={(e) => setUser({ ...user, confirmPassword: e.target.value })}></input>
 
-                    <p>Том жижиг үсэг орсон байна.</p>
-                    <p>Тоо орсон байна.</p>
-                    <p>Тусгай тэмдэгт орсон байна.</p>
-                    <p>8-с дээш оронтой байна.</p>
+                    <p className='checkLetter'>Том жижиг үсэг орсон байна.</p>
+                    <p className='checkNumber'>Тоо орсон байна.</p>
+                    <p className='checkSpecial'>Тусгай тэмдэгт орсон байна.</p>
+                    <p className='checkMark'>8-с дээш оронтой байна.</p>
 
                 </form>
                 <div className='modal-footer'>

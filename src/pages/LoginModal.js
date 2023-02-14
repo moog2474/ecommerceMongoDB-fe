@@ -14,7 +14,7 @@ export default function LoginModal({ login, setLogin }) {
                 console.log(data.result);
                 setUsers(data.result)
             })
-    })
+    }, [])
 
     const [signUp, setSignUp] = useState(false)
 
