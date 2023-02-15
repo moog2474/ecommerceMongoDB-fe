@@ -1,20 +1,35 @@
 import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 import "../style/login.css"
 import SignUp from './SignUp'
 
 export default function LoginModal({ login, setLogin }) {
 
-    const [users, setUsers] = useState([])
-    const [err, setErr] = useState('')
+    const [user, setUser] = useState({ email: "", password: "" });
+    const navigate = useNavigate();
 
-    useEffect(() => {
-        fetch("http://localhost:8000/be/users")
-            .then((res) => res.json())
-            .then((data) => {
-                console.log(data.result);
-                setUsers(data.result)
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setUser({ ...user, [name]: value })
+    }
+
+    const onLogin = () => {
+        axios
+            .post("http://localhost:8000/be/users/login", user)
+            .then(({ data: { status, result } }) => {
+                if (status) {
+                    localStorage.setItem("user", result.userName);
+                    navigate("/home");
+                    setLogin(false);
+                }
+                else {
+                    alert("Login unsuccessful")
+                }
             })
-    }, [])
+            .catch((err) => alert(err))
+    }
+
 
     const [signUp, setSignUp] = useState(false)
 
@@ -28,8 +43,19 @@ export default function LoginModal({ login, setLogin }) {
                     }} aria-label="Close"></button>
                 </div>
                 <form className='d-flex flex-column gap-3 mb-3'>
-                    <input type="text" placeholder='email or username'></input>
-                    <input type="text" placeholder='password'></input>
+                    <input
+                        type="text"
+                        placeholder='email'
+                        value={user.email}
+                        onChange={handleChange}
+                    />
+
+                    <input
+                        type="text"
+                        placeholder='password'
+                        value={user.password}
+                        onChange={handleChange}
+                    />
                     <p>Doesn't have an account.
                         <a className='login'
                             href='#'
@@ -37,9 +63,7 @@ export default function LoginModal({ login, setLogin }) {
                         >Sign Up</a></p>
                 </form>
                 <div className='modal-footer'>
-                    <button onClick={() => {
-
-                    }} type='button' className='btn btn-primary'>Login</button>
+                    <button onClick={onLogin} type='button' className='btn btn-primary'>Login</button>
                 </div>
                 <SignUp
                     setLogin={setLogin}

@@ -5,6 +5,7 @@ import Dashboard from './components/admin/Dashboard';
 import Users from './components/admin/Users';
 import ProductList from './components/admin/ProductList'
 import Menu from './components/admin/Menu';
+import Category from './components/admin/Category';
 import './App.css';
 import Main from './pages/Main';
 import LoginModal from './pages/LoginModal';
@@ -23,6 +24,8 @@ function App() {
           <Route path='/users' element={<Users />} />
           <Route path='/menu' element={<Menu />} />
           <Route path='/products' element={<ProductList />} />
+          <Route path='/category' element={<Category />} />
+
         </Route>
       </Routes>
     </div >

@@ -53,7 +53,7 @@ export default function Users() {
                                 <th className='col-2'># </th>
                                 <th className='col-2'>Username</th>
                                 <th className='col-2'>Firstname</th>
-                                <th className='col-2'>Last image</th>
+                                <th className='col-2'>Lastname</th>
                                 <th className='col-2'>Usertype</th>
                                 <th className='col-2'>Edit/Del</th>
                             </thead>

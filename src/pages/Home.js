@@ -1,6 +1,8 @@
 import React from 'react'
 import { CiSearch } from 'react-icons/ci'
 import '../style/home.css'
+import ProductCard from './ProductCard'
+
 
 export default function Home() {
     return (
@@ -51,6 +53,9 @@ export default function Home() {
                 <p>Pellentesque etiam blandit in tincidunt at donec. Eget ipsum dignissim placerat nisi, adipiscing mauris non purus parturient.</p>
             </div>
 
+            <div>
+                <ProductCard />
+            </div>
 
         </div>
     )

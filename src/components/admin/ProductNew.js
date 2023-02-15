@@ -3,7 +3,7 @@ import axios from 'axios'
 
 
 
-export default function ProductNew({ modalProduct, setModalProduct, getId, isEdited, setIsEdited, setProducts }) {
+export default function ProductNew({ modalProduct, setModalProduct, getId, isEdited, setIsEdited, products, setProducts }) {
 
 
     const init = {
@@ -19,6 +19,7 @@ export default function ProductNew({ modalProduct, setModalProduct, getId, isEdi
     const [product, setProduct] = useState(init)
     const [err, setErr] = useState('')
     const [user, setUser] = useState([])
+    const [category, setCategory] = useState([])
     const [loading, setLoading] = useState(false)
 
 
@@ -49,6 +50,15 @@ export default function ProductNew({ modalProduct, setModalProduct, getId, isEdi
             .then((response) => response.json())
             .then((dt) => {
                 setUser(dt.result);
+            })
+            .catch((err) => setErr(console.log(err)))
+    }, [])
+
+    useEffect(() => {
+        fetch("http://localhost:8000/be/category")
+            .then((response) => response.json())
+            .then((dt) => {
+                setCategory(dt.result);
             })
             .catch((err) => setErr(console.log(err)))
     }, [])
@@ -134,7 +144,7 @@ export default function ProductNew({ modalProduct, setModalProduct, getId, isEdi
 
     return (
         <div className="modal" style={{ display: modalProduct ? "block" : "none" }}>
-            <div className="body">
+            <div className="body product">
                 <div className="modal-header">
                     <h1 className="modal-title fs-5 text-warning mb-5 border-bottom" id="staticBackdropLabel">Add product</h1>
                     <button type="button" className="btn-close" onClick={() => {
@@ -144,35 +154,35 @@ export default function ProductNew({ modalProduct, setModalProduct, getId, isEdi
                 </div>
                 <div className='d-flex flex-column col text-start'>
 
-                    <div className='col d-flex gap-3 mb-2 justify-content-between'>
+                    <div className='col d-flex gap-3 mb-2 justify-content-between align-items-center'>
                         <label>Product Name</label>
                         <input className='w-75' value={product?.productName} type='text'
                             onChange={(e) =>
                                 setProduct({ ...product, productName: e.target.value })}></input>
                     </div>
 
-                    <div className='col d-flex gap-3 mb-2 justify-content-between'>
+                    <div className='col d-flex gap-3 mb-2 justify-content-between align-items-center'>
                         <label>Discount</label>
                         <input className='w-75' value={product?.discount} type="number"
                             onChange={(e) =>
                                 setProduct({ ...product, discount: e.target.value })}></input>
                     </div>
 
-                    <div className='col d-flex gap-3 mb-2 justify-content-between'>
+                    <div className='col d-flex gap-3 mb-2 justify-content-between align-items-center'>
                         <label>Price</label>
                         <input className='w-75' value={product?.price} type='number'
                             onChange={(e) =>
                                 setProduct({ ...product, price: e.target.value })}></input>
                     </div>
 
-                    <div className='col d-flex gap-3 mb-2 justify-content-between'>
+                    <div className='col d-flex gap-3 mb-2 justify-content-between align-items-center'>
                         <label>Quantity</label>
                         <input className='w-75' value={product?.quantity} type='number'
                             onChange={(e) => setProduct({ ...product, quantity: e.target.value })}></input>
                     </div>
 
                     <div className='col gap-5 mb-2 justify-content-between'>
-                        <div className='d-flex justify-content-between col-12 mb-2 mt-2'>
+                        <div className='d-flex justify-content-between align-items-center col-12 mb-2 mt-2'>
                             <label>Thumbnail</label>
                             <input className='w-50' type='file'
                                 onChange={(e) => {
@@ -190,7 +200,7 @@ export default function ProductNew({ modalProduct, setModalProduct, getId, isEdi
                             </div> : ''}
 
                         </div>
-                        <div className='d-flex justify-content-between col-12 mt-2 mb-2'>
+                        <div className='d-flex justify-content-between align-items-center col-12 mt-2 mb-2'>
                             <label>Images</label>
                             <input className='w-50'
                                 type='file'
@@ -208,11 +218,26 @@ export default function ProductNew({ modalProduct, setModalProduct, getId, isEdi
                             </div> : ''}
                         </div>
                     </div>
-                    <div className='col d-flex gap-3 mb-2 justify-content-between'>
+                    <div className='col d-flex gap-3 mb-2 justify-content-between align-items-center'>
+                        <label>Category</label>
+                        <select className='w-75'
+                            value={product.category}
+                            onChange={(e) => setProduct({ ...product, category: e.target.value })}>
+                            <option value='0'>Select category</option>
+                            {category.map((e) => {
+                                return (
+                                    <option value={e.categoryNames}>
+                                        {e.categoryName}
+                                    </option>
+                                )
+                            })}
+                        </select>
+                    </div>
+                    <div className='col d-flex gap-3 mb-2 justify-content-between align-items-center'>
                         <label>Created user</label>
                         <select className='w-75' value={product?.createdUser}
                             onChange={(e) => setProduct({ ...product, createdUser: e.target.value })}>
-                            <option value='0'>select</option>
+                            <option value='0'>Select created user</option>
                             {user?.map((e, index) => {
                                 if (e.userType == "admin") {
                                     return (
@@ -225,7 +250,7 @@ export default function ProductNew({ modalProduct, setModalProduct, getId, isEdi
                             }
                         </select>
                     </div>
-                    <div className='col d-flex gap-3 mb-2 justify-content-between'>
+                    <div className='col d-flex gap-3 mb-2 justify-content-between align-items-center'>
                         <label>Description</label>
                         <textarea className='w-75' value={product?.description}
                             onChange={(e) => setProduct({ ...product, description: e.target.value })}></textarea>

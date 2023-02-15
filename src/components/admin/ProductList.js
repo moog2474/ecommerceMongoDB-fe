@@ -63,7 +63,7 @@ export default function ProductList() {
                         <table className="table">
                             <thead className='border-bottom '>
                                 <th className='col-1'># </th>
-                                <th className='col-2'>Product name</th>
+                                <th className='col-1'>Product name</th>
                                 <th className='col-2'>Category</th>
                                 <th className='col-1'>Price</th>
                                 <th className='col-2'>Created user</th>
@@ -74,17 +74,17 @@ export default function ProductList() {
                             </thead>
                             <tbody>
                                 {
-                                    products.map(({ id, productName, categoryId, price, createdUser, quantity, discount, description }, index) => {
+                                    products.map(({ id, productName, category, price, createdUser, quantity, discount, description }, index) => {
                                         return (
                                             <tr key={index}>
                                                 <td className='col-1'>{index + 1}</td>
-                                                <td className='col-2'>{productName}</td>
-                                                <td className='col-2'>{categoryId}</td>
+                                                <td className='col-1'>{productName}</td>
+                                                <td className='col-2'>{category}</td>
                                                 <td className='col-1'>{price}$</td>
                                                 <td className='col-2'>{createdUser}</td>
                                                 <td className='col-1'>{quantity}</td>
                                                 <td className='col-1'>{discount}%</td>
-                                                <td className='col-1'>{description}</td>
+                                                <td className='col-1'>{description.slice(0, 12,)}</td>
                                                 <td className="col-1 d-flex w-100 justify-content-center gap-2">
                                                     <span
                                                     ><AiFillEdit
@@ -110,6 +110,7 @@ export default function ProductList() {
                 isEdited={isEdited}
                 setIsEdited={setIsEdited}
                 getId={getId}
+                products={products}
                 setProducts={setProducts}
             />
         </div>
