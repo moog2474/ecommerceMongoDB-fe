@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-
+import "../style/productcard.css"
 export default function ProductCard() {
 
     const [products, setProducts] = useState([])
@@ -14,18 +14,20 @@ export default function ProductCard() {
     return (
         <div className='d-flex gap-2'>
             {
-                products.map(({ thumbnail, productName, description }) => {
+                products.map(({ thumbimage, productName, description, category, price }) => {
                     return (
-                        <div class="card" style="width: 18rem;">
-                            <img src={thumbnail} class="card-img-top" alt="..." />
-                            <div class="card-body">
-                                <h5 class="card-title">{productName}</h5>
-                                <p class="card-text">{description.slice(0, 20)}</p>
+                        <div className="card" width={"18rem"}>
+                            <img src={thumbimage} className="card-img-top" alt="" />
+                            <div className="card-body text-start d-flex flex-column gap-2">
+                                <p className='pcolor'>{category}</p>
+                                <h5 className="card-title">{productName}</h5>
+                                <p className="pcolor one card-text">{description.slice(0, 20)}</p>
+                                <p>${price}</p>
                             </div>
                         </div>
                     )
                 })
             }
-        </div>
+        </div >
     )
 }

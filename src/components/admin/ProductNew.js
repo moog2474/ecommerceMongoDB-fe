@@ -184,7 +184,8 @@ export default function ProductNew({ modalProduct, setModalProduct, getId, isEdi
                     <div className='col gap-5 mb-2 justify-content-between'>
                         <div className='d-flex justify-content-between align-items-center col-12 mb-2 mt-2'>
                             <label>Thumbnail</label>
-                            <input className='w-50' type='file'
+                            <input className='w-50'
+                                type='file'
                                 onChange={(e) => {
                                     console.log(e.target.files)
                                     const arr = []
@@ -209,7 +210,6 @@ export default function ProductNew({ modalProduct, setModalProduct, getId, isEdi
                                     console.log(e.target.files)
                                     const arr = [];
                                     arr.push(e.target.files);
-
                                     sendFile("images", arr)
                                 }}
                             ></input>
@@ -265,3 +265,4 @@ export default function ProductNew({ modalProduct, setModalProduct, getId, isEdi
 
     )
 }
+

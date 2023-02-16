@@ -75,3 +75,19 @@ h2 {
 .center {
     width: 50vw;
 }
+
+.prod button {
+    background-color: rgb(81, 133, 129);
+    padding: 10px;
+    color: white;
+    width: 170px;
+}
+
+.txt {
+    font-size: 44px;
+    font-weight: 700;
+}
+
+.two {
+    gap: 50px;
+}

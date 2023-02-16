@@ -53,10 +53,59 @@ export default function Home() {
                 <p>Pellentesque etiam blandit in tincidunt at donec. Eget ipsum dignissim placerat nisi, adipiscing mauris non purus parturient.</p>
             </div>
 
-            <div>
+            <div className='mt-5'>
                 <ProductCard />
             </div>
 
+            <div className='container d-flex mt-5 justify-content-between g-5 two'>
+                <div className='d-flex flex-column justify-content-between text-start prod col-6'>
+                    <p className='orange'>Our Product</p>
+                    <h2>Crafted by talented and high quality material</h2>
+                    <p>Pellentesque etiam blandit in tincidunt at donec. Eget ipsum dignissim placerat nisi, adipiscing mauris non purus parturient. morbi fermentum, vivamus et accumsan dui tincidunt pulvinar</p>
+                    <button>Learn more</button>
+                    <img src={require("../images/half.jpg")} alt='half' />
+                </div>
+                <div className='d-flex flex-column col-6'>
+                    <div className='d-flex justify-content-end gap-5'>
+                        <div className='d-flex flex-column text-start'>
+                            <b className='txt'>20+</b>
+                            <p>Years Experience</p>
+                        </div>
+                        <div className='d-flex flex-column text-start'>
+                            <b className='txt'>460</b>
+                            <p>Happy Client</p>
+                        </div>
+                        <div className='d-flex flex-column text-start'>
+                            <b className='txt'>150+</b>
+                            <p>Product Finished</p>
+                        </div>
+                    </div>
+                    <img src={require("../images/full.jpg")} />
+                </div>
+            </div>
+
+            <div className='d-flex flex-column text-center'>
+                <h5 className='orange'>Testimonials</h5>
+                <h2>What out customer say</h2>
+                <p>Pellentesque etiam blandit in tincidunt at donec. Eget ipsum dignissim placerat nisi, adipiscing mauris non purus parturient.</p>
+                <div className='d-flex g-5'>
+                    {/* CustomerFeedback should be here from another component*/}
+                </div>
+            </div>
+
+            <div className='container'>
+                <div>
+                    <h5 className='orange'>Articles</h5>
+                    <h2>The best furniture comes from Lalasia</h2>
+                    <p>Pellentesque etiam blandit in tincidunt at donec. </p>
+                    <div>
+
+                    </div>
+                </div>
+                <div>
+
+                </div>
+            </div>
         </div>
     )
 }
