@@ -19,7 +19,7 @@ export default function UserNew({ modal, setModal, isEdited, setIsedited, myId, 
     const [user, setUser] = useState([])
 
     function getData() {
-        fetch('http://localhost:8000/be/users')
+        fetch('http://localhost:8080/be/users')
             .then(res => res.json())
             .then((data) => {
                 console.log(data)
@@ -28,7 +28,7 @@ export default function UserNew({ modal, setModal, isEdited, setIsedited, myId, 
     }
 
     function getDataId() {
-        fetch(`http://localhost:8000/be/users/${myId}`)
+        fetch(`http://localhost:8080/be/users/${myId}`)
             .then(res => res.json())
             .then((data) => {
                 console.log(data.result);
@@ -47,7 +47,7 @@ export default function UserNew({ modal, setModal, isEdited, setIsedited, myId, 
 
     const addUser = () => {
         isEdited ?
-            fetch(`http://localhost:8000/be/users/${myId}`, {
+            fetch(`http://localhost:8080/be/users/${myId}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(user)
@@ -60,7 +60,7 @@ export default function UserNew({ modal, setModal, isEdited, setIsedited, myId, 
                 })
                 .catch((err) => setError(console.log(err)))
             :
-            fetch("http://localhost:8000/be/users", {
+            fetch("http://localhost:8080/be/users", {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(user)

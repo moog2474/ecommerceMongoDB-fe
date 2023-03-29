@@ -3,8 +3,8 @@ import { AiFillDelete, AiFillEdit } from 'react-icons/ai'
 import MenuNew from './MenuNew'
 
 
-export default function Menu() {
 
+export default function Menu() {
     const [menu, setMenu] = useState([])
     const [err, setErr] = useState("")
     const [modal, setModal] = useState(false)
@@ -12,7 +12,7 @@ export default function Menu() {
     const [getMenuId, setGetMenuId] = useState('')
 
     useEffect(() => {
-        fetch("http://localhost:8000/be/menu")
+        fetch("http://localhost:8080/be/menu")
             .then(res => res.json())
             .then((data) => {
                 console.log(data.result);
@@ -23,13 +23,13 @@ export default function Menu() {
     }, [])
 
     const deleteMenu = (id) => {
-        fetch(`http://localhost:8000/be/menu/${id}`, {
+        fetch(`http://localhost:8080/be/menu/${id}`, {
             method: "DELETE",
             headers: { "Content-type": "application/json" },
         })
             .then(res => res.json())
             .then((data) => {
-                console.log(data.result);
+                // console.log(data.result);
                 setMenu(data.result)
             })
             .catch((err) => console.log(err))
@@ -40,7 +40,6 @@ export default function Menu() {
         setIsEdited(!isEdited)
         setGetMenuId(id)
     }
-
 
 
     return (
@@ -57,30 +56,28 @@ export default function Menu() {
                             <td className='col-1'>#</td>
                             <td className='col-2'>Menu name</td>
                             <td className='col-2'>Type</td>
-                            <td className='col-1'>Position</td>
                             <td className='col-1'>Edit/Delete</td>
                         </tr>
                     </thead>
-                    <tbody>
-                        {menu.map(({ menuName, position, id, type }, index) => {
-                            return (
-                                <tr className='border-bottom' key={index}>
-                                    <td className='col-1'>{index + 1}</td>
-                                    <td className='col-2'>{menuName}</td>
-                                    <td className='col-2'>{type}</td>
-                                    <td className='col-1'>{position}</td>
-                                    <td className='col-1 d-flex w-100 justify-content-center gap-3'>
-                                        <AiFillEdit
-                                            onClick={() => editMenu(id)}
-                                            size={20} />
-                                        <AiFillDelete
-                                            onClick={() => deleteMenu(id)} size={20} />
-                                    </td>
-                                </tr>)
-
-
-                        })}
-                    </tbody>
+                 
+                                {menu.map(({ menuName, id, type}, index) => {
+                                    return (
+                                    <>
+                                            <td className='col-1'>{index + 1}</td>
+                                            <td className='col-2'>{menuName}</td>
+                                            <td className='col-2'>{type}</td>
+                                            <td className='col-1 d-flex w-100 justify-content-center gap-3'>
+                                                <AiFillEdit
+                                                    onClick={() => editMenu(id)}
+                                                    size={20} />
+                                                <AiFillDelete
+                                                    onClick={() => deleteMenu(id)} size={20} />
+                                            </td>
+                                        </>
+                                    )
+                                }
+                                )}
+                 
                 </table>
 
                 <MenuNew
@@ -91,8 +88,8 @@ export default function Menu() {
                     getMenuId={getMenuId}
                     setMenu={setMenu}
                 />
-            </div>
+            </div >
 
-        </div>
+        </div >
     )
 }

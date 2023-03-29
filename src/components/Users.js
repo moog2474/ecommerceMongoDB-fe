@@ -12,7 +12,7 @@ export default function Users() {
     const [myId, setMyId] = useState('')
 
     useEffect(() => {
-        fetch("http://localhost:8000/be/users")
+        fetch("http://localhost:8080/be/users")
             .then((response) => response.json())
             .then((dt) => {
                 console.log(dt.result);
@@ -22,7 +22,7 @@ export default function Users() {
     }, [])
 
     const deleteUser = (id) => {
-        fetch(`http://localhost:8000/be/users/${id}`, {
+        fetch(`http://localhost:8080/be/users/${id}`, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
         })
@@ -59,7 +59,7 @@ export default function Users() {
                             </thead>
                             <tbody>
                                 {
-                                    users.map(({ id, userName, firstName, lastName, userType }, index) => {
+                                    users.map(({ _id, userName, firstName, lastName, userType }, index) => {
                                         return (
                                             <tr key={index}>
                                                 <td className='col-2'>{index + 1}</td>
@@ -70,11 +70,11 @@ export default function Users() {
                                                 <td className="col-2">
                                                     <button
                                                         className="btn btn-warning"
-                                                        onClick={() => editUser(id)}
+                                                        onClick={() => editUser(_id)}
                                                     >Edit</button>
                                                     <button
                                                         className="btn btn-danger"
-                                                        onClick={() => deleteUser(id)}
+                                                        onClick={() => deleteUser(_id)}
                                                     >Delete</button>
                                                 </td>
                                             </tr>

@@ -5,10 +5,9 @@ import { Link } from 'react-router-dom'
 export default function UserNew({ modal, setModal, isEdited, setIsEdited, setMenu, getMenuId }) {
 
   const init = {
-    id: '',
+    _id: '',
     menuName: '',
     link: '/',
-    position: 0,
     type: ''
 
   }
@@ -18,7 +17,7 @@ export default function UserNew({ modal, setModal, isEdited, setIsEdited, setMen
   const [menus, setMenus] = useState([])
 
   function getMenu() {
-    fetch('http://localhost:8000/be/menu')
+    fetch('http://localhost:8080/be/menu')
       .then(res => res.json())
       .then((data) => {
         console.log(data)
@@ -27,7 +26,7 @@ export default function UserNew({ modal, setModal, isEdited, setIsEdited, setMen
   }
 
   function getId() {
-    fetch(`http://localhost:8000/be/menu/${getMenuId}`)
+    fetch(`http://localhost:8080/be/menu/${getMenuId}`)
       .then(res => res.json())
       .then((data) => {
         console.log(data.result);
@@ -47,7 +46,7 @@ export default function UserNew({ modal, setModal, isEdited, setIsEdited, setMen
 
   const addMenu = () => {
     isEdited ?
-      fetch(`http://localhost:8000/be/menu/${getMenuId}`, {
+      fetch(`http://localhost:8080/be/menu/${getMenuId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(menus)
@@ -60,7 +59,7 @@ export default function UserNew({ modal, setModal, isEdited, setIsEdited, setMen
         })
         .catch((err) => setError(console.log(err)))
       :
-      fetch("http://localhost:8000/be/menu", {
+      fetch("http://localhost:8080/be/menu", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(menus)
@@ -89,7 +88,6 @@ export default function UserNew({ modal, setModal, isEdited, setIsEdited, setMen
         <form className='d-flex flex-column gap-3 mb-3'>
           <input type='text' className='w-100 form-contol bo' placeholder='Menu name' value={menus?.menuName} onChange={(e) => setMenus({ ...menus, menuName: e.target.value })}></input>
           <input type='text' className='w-100 form-contol bo' placeholder='Menu type' value={menus?.type} onChange={(e) => setMenus({ ...menus, type: e.target.value })} />
-          <input type='text' className='w-100 form-contol bo' placeholder='Position' value={menus?.position} onChange={(e) => setMenus({ ...menus, position: e.target.value })}></input>
           <input type='text' className='w-100 form-contol bo' placeholder='Link' value={menus?.link} onChange={(e) => setMenus({ ...menus, link: e.target.value })}></input>
         </form>
         <div className='modal-footer'>

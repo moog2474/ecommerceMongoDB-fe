@@ -1,11 +1,11 @@
 import logo from './logo.svg';
 import { Routes, Route } from 'react-router-dom'
-import AdminLayout from './components/admin/AdminLayout';
-import Dashboard from './components/admin/Dashboard';
-import Users from './components/admin/Users';
-import ProductList from './components/admin/ProductList'
-import Menu from './components/admin/Menu';
-import Category from './components/admin/Category';
+import AdminLayout from './components/AdminLayout';
+import Dashboard from './components/Dashboard';
+import Users from './components/Users';
+import ProductList from './components/ProductList'
+import Menu from './components/Menu';
+import Category from './components/Category';
 import './App.css';
 import Main from './pages/Main';
 import LoginModal from './pages/LoginModal';

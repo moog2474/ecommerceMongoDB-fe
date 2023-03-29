@@ -9,7 +9,7 @@ export default function AdminLayout() {
     const [err, setErr] = useState("");
 
     useEffect(() => {
-        fetch("http://localhost:8000/be/menu")
+        fetch("http://localhost:8080/be/menu")
             .then((response) => response.json())
             .then((dt) => {
                 console.log(dt.result);
@@ -28,7 +28,7 @@ export default function AdminLayout() {
                         <span>OS Admin</span>
                     </div>
                     {data.map((e) => {
-                        if (e.type === "adminMenu") {
+                        if (e.type === "back") {
                             return <div className='d-flex flex-column text-start ms-2 p-3 border-bottom lol'>
                                 <Link to={`/${e.menuName.toLowerCase()}`}>{e.menuName}</Link>
                             </div>
